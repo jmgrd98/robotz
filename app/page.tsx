@@ -2,14 +2,26 @@
 
 import Image from 'next/image'
 import { useState } from 'react';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [botId, setBotId] = useState('1')
 
+  const { data: session } = useSession() as unknown as { data: Session | null };
+
   const runBot = async (e: any) => {
     e.preventDefault()
+
+
+    if (!session?.user) {
+      toast.error('Please login to run the bot')
+      return
+    }
+
 
     setIsLoading(true)
     
@@ -39,6 +51,18 @@ export default function Home() {
         ) : (
             <button className='p-5 rounded bg-black text-white' onClick={runBot}>Rodar bot</button>
         )}
+
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={true}
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable={true}
+          pauseOnHover={false}
+        />
     </main>
   )
 }
