@@ -15,39 +15,9 @@ export default function Home() {
 
   const { data: session } = useSession() as unknown as { data: Session | null };
 
-  const runBot = async (e: any) => {
-    e.preventDefault()
-
-
-    if (!session?.user) {
-      toast.error('Please login to run the bot')
-      return
-    }
-
-
-    setIsLoading(true)
-    
-    try {
-      const res = await fetch('/api/run-bot', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ botId })
-      })
-      const data = await res.json()
-      console.log(data)
-    }
-    catch (err) {
-      console.log(err)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   return (
     <main className="flex flex-col items-center justify-between p-8">
-      <h1 className='text-5xl mb-24 font-bold'>Choose your bot</h1>
+      <h1 className='text-5xl mb-24 font-bold'>Choose a bot</h1>
       <div className='flex flex-wrap justify-evenly gap-10 w-full'>
       <BotCard
         id={1}
