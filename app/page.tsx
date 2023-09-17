@@ -4,6 +4,8 @@ import Image from 'next/image'
 
 export default function Home() {
 
+  const botId = '1'
+
   function runBot() {
     fetch('/api/run-bot', {
       method: 'POST',
@@ -11,9 +13,21 @@ export default function Home() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        botId: '1'
+        botId
       })
     })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.log('There was a problem with the fetch operation:', error.message);
+    });
     console.log('rodando bot');
   }
 
