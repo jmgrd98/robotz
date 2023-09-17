@@ -5,6 +5,9 @@ import { useState } from 'react';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSession } from 'next-auth/react';
+import BotCard from '@/components/BotCard';
+import tinderIcon from "../public/icons/tinder-icon.svg";
+import twitterIcon from "../public/icons/Twitter X.svg"
 
 export default function Home() {
 
@@ -44,25 +47,20 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className='text-5xl font-bold'>Tinder Bot</h1>
-      {isLoading ? (
-            <div className="loader"></div>
-        ) : (
-            <button className='p-5 rounded bg-black text-white' onClick={runBot}>Rodar bot</button>
-        )}
-
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={true}
-          rtl={false}
-          pauseOnFocusLoss={false}
-          draggable={true}
-          pauseOnHover={false}
-        />
+    <main className="flex flex-col items-center justify-between p-8">
+      <h1 className='text-5xl mb-24 font-bold'>Choose your bot</h1>
+      <div className='flex flex-wrap justify-evenly gap-10 w-full'>
+      <BotCard
+        title='Tinder Bot'
+        description='Automate your Tinder swipes and matches!'
+        icon={tinderIcon}
+      />
+      <BotCard
+        title='Twiter Bot'
+        description='Automate your tweets!'
+        icon={twitterIcon}
+      />
+      </div>
     </main>
   )
 }
