@@ -1,40 +1,26 @@
 'use client'
 
 import Image from 'next/image'
+import { useState } from 'react';
 
 export default function Home() {
 
-  const botId = '1'
+  const [botId, setBotId] = useState('')
 
-  async function runBot() {
-    try {
-      const response = await fetch('/api/run-bot', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          botId
-        })
-      });
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-        return Error;
-      }
-  
-      const data = await response.json();
-      console.log(data);
-      return data;
-    } catch (error: any) {
-      console.log('There was a problem:', error.message);
-      return error;
-    }
+  const runBot = async (e: any) => {
+    e.preventDefault()
+    const res = await fetch('/api/run-bot')
+    const data = await res.json()
+    setBotId(data.id)
   }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <button className='p-5 rounded bg-black text-white' onClick={runBot}>Rodar bot</button>
+      <div className='flex flex-col items-center'>
+        <h1 className='text-3xl font-bold'>Bot ID: {botId}</h1>
+      </div>
+
     </main>
   )
 }
