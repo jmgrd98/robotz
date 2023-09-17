@@ -6,29 +6,30 @@ export default function Home() {
 
   const botId = '1'
 
-  function runBot() {
-    fetch('/api/run-bot', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        botId
-      })
-    })
-    .then(response => {
+  async function runBot() {
+    try {
+      const response = await fetch('/api/run-bot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          botId
+        })
+      });
+  
       if (!response.ok) {
         throw new Error('Network response was not ok');
+        return Error;
       }
-      return response.json();
-    })
-    .then(data => {
+  
+      const data = await response.json();
       console.log(data);
-    })
-    .catch(error => {
-      console.log('There was a problem with the fetch operation:', error.message);
-    });
-    console.log('rodando bot');
+      return data;
+    } catch (error: any) {
+      console.log('There was a problem:', error.message);
+      return error;
+    }
   }
 
   return (
