@@ -5,10 +5,13 @@ import { useState } from 'react';
 
 export default function Home() {
 
+  const [isLoading, setIsLoading] = useState(false)
   const [botId, setBotId] = useState('1')
 
   const runBot = async (e: any) => {
     e.preventDefault()
+
+    setIsLoading(true)
     
     try {
       const res = await fetch('/api/run-bot', {
@@ -23,14 +26,19 @@ export default function Home() {
     }
     catch (err) {
       console.log(err)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className='text-5xl font-bold'>Tinder Bot</h1>
-      <button className='p-5 rounded bg-black text-white' onClick={runBot}>Rodar bot</button>
-
+      {isLoading ? (
+            <div className="loader"></div>
+        ) : (
+            <button className='p-5 rounded bg-black text-white' onClick={runBot}>Rodar bot</button>
+        )}
     </main>
   )
 }

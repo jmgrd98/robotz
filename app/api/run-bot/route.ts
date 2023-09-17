@@ -14,7 +14,7 @@ export async function POST(req: Request, res: any) {
             return NextResponse.json(new Error('botId is required'), { status: 400 });
         }
         await new Promise((resolve, reject) => {
-            exec('python C:\\Users\\Zello\\Documents\\Github\\robotz\\app\\bots\\tinder-bot\\tinder_bot.py', (error, stdout, stderr) => {
+            exec('python C:\\Users\\Zello\\Documents\\Github\\tinder-bot\\tinder_bot.py', (error, stdout, stderr) => {
                 if (error) {
                     console.error(`exec error: ${error}`);
                     reject(new Error(`Error: ${error}`));
