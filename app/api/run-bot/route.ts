@@ -13,17 +13,35 @@ export async function POST(req: Request, res: any) {
         if (!botId) {
             return NextResponse.json(new Error('botId is required'), { status: 400 });
         }
-        await new Promise((resolve, reject) => {
-            exec('python C:\\Users\\Zello\\Documents\\Github\\tinder-bot\\tinder_bot.py', (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`exec error: ${error}`);
-                    reject(new Error(`Error: ${error}`));
-                    return;
-                }
-                res.send(stdout);
-                resolve(stdout);
+
+        if (botId === 1) {
+            await new Promise((resolve, reject) => {
+                exec('python C:\\Users\\Zello\\Documents\\Github\\tinder-bot\\tinder_bot.py', (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`exec error: ${error}`);
+                        reject(new Error(`Error: ${error}`));
+                        return;
+                    }
+                    res.send(stdout);
+                    resolve(stdout);
+                });
             });
-        });
+        }
+
+        if (botId === 2) {
+            await new Promise((resolve, reject) => {
+                exec('python C:\\Users\\Zello\\Documents\\Github\\Python-twitter-bot\\bot.py', (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`exec error: ${error}`);
+                        reject(new Error(`Error: ${error}`));
+                        return;
+                    }
+                    res.send(stdout);
+                    resolve(stdout);
+                });
+            });
+        }
+        
         return NextResponse.json({ message: `Bot with ID ${botId} has been started.`, botId, status: 200 });
     } catch (error) {
         console.log(error);

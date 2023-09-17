@@ -12,7 +12,6 @@ import twitterIcon from "../public/icons/Twitter X.svg"
 export default function Home() {
 
   const [isLoading, setIsLoading] = useState(false)
-  const [botId, setBotId] = useState('1')
 
   const { data: session } = useSession() as unknown as { data: Session | null };
 
@@ -51,11 +50,13 @@ export default function Home() {
       <h1 className='text-5xl mb-24 font-bold'>Choose your bot</h1>
       <div className='flex flex-wrap justify-evenly gap-10 w-full'>
       <BotCard
+        id={1}
         title='Tinder Bot'
         description='Automate your Tinder swipes and matches!'
         icon={tinderIcon}
       />
       <BotCard
+        id={2}
         title='Twiter Bot'
         description='Automate your tweets!'
         icon={twitterIcon}
