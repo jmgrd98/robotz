@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import BotCard from '@/components/BotCard';
 import tinderIcon from "../public/icons/tinder-icon.svg";
 import twitterIcon from "../public/icons/Twitter X.svg"
+import {Session} from "next-auth";
 
 export default function Home() {
 
