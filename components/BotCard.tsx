@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { toast, ToastContainer } from "react-toastify";
+import {Session} from "next-auth";
 
 export default function BotCard({ id, title, description, icon }: any) {
   const [isLoading, setIsLoading] = useState(false);
