@@ -1,0 +1,3 @@
+[submodule "tinder-bot"]
+	path = tinder-bot
+	url = ./tinder-bot
