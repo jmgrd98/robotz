@@ -16,7 +16,7 @@ export async function POST(req: Request, res: any) {
 
         if (botId === 1) {
             await new Promise((resolve, reject) => {
-                exec('python C:\\Users\\Zello\\Documents\\Github\\tinder-bot\\tinder_bot.py', (error, stdout, stderr) => {
+                exec('python ../../../tinder-bot/tinder_bot.py', (error, stdout, stderr) => {
                     if (error) {
                         console.error(`exec error: ${error}`);
                         reject(new Error(`Error: ${error}`));
